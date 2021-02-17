@@ -138,9 +138,6 @@ public class ProjectImage
    * resulting in the creation of a new array of pixels.
    *************************************************************************/
 
-  // CPS122 STUDENTS - ADD YOUR METHODS WITH APPROPRIATE COMMENTS IN THE
-  // APPROPRIATE ORDER BELOW, THEN REMOVE THESE LINES.
-
   /** Lighten the image by a small fixed amount
    */
   public void lighten() {
@@ -152,6 +149,76 @@ public class ProjectImage
         }
       }
     }
+  }
+  /** Darken the image by the same fixed amount as lighten()
+   */
+  public void darken(){
+    for (int row = 0; row < height; row ++){
+      for(int col = 0; col < width; col ++){
+        pixels[row][col] -= LIGHTEN_DARKEN_AMOUNT;
+        if (pixels[row][col] < MIN_BRIGHTNESS) {
+          pixels[row][col] = MIN_BRIGHTNESS;
+        }
+      }
+    }     
+  }
+
+  /** With the average pixel value as reference, it takes all pixels in the array,
+   *  and makes all values closer to the average (if they are not average values yet).
+   */
+  public void reduceContrast(){
+    int avgPixelValue = getAvgPixelValue(pixels);
+    for (int row = 0; row < height; row ++){
+      for(int col = 0; col < width; col ++){
+        if (pixels[row][col] < avgPixelValue){
+          pixels[row][col]++;
+          if (pixels[row][col] > MAX_BRIGHTNESS){
+            pixels[row][col] = MAX_BRIGHTNESS;
+          }
+        }else if (pixels[row][col] > avgPixelValue){
+          pixels[row][col]--;
+          if (pixels[row][col] < MIN_BRIGHTNESS){
+            pixels[row][col] = MIN_BRIGHTNESS;
+          }
+        }
+      }
+    }
+  }
+  /** With the average pixel value as reference, it takes all pixels in the array,
+   *  and makes all values further from the average (if they are not average values yet).
+   */
+  public void enhanceContrast(){
+    int avgPixelValue = getAvgPixelValue(pixels);
+    for (int row = 0; row < height; row ++){
+      for(int col = 0; col < width; col ++){
+        if (pixels[row][col] < avgPixelValue){
+          pixels[row][col]--;
+          if (pixels[row][col] < MIN_BRIGHTNESS){
+            pixels[row][col] = MIN_BRIGHTNESS;
+          }
+        }else if (pixels[row][col] > avgPixelValue){
+          pixels[row][col]++;
+          if (pixels[row][col] > MAX_BRIGHTNESS){
+            pixels[row][col] = MAX_BRIGHTNESS;
+          }
+        }
+      }
+    }
+  }
+  /** Takes all the pixels in a picture and calculates the average pixel value
+   * 
+   *  @param pixels the 2D array of pixels; the picture
+   *  @return the integer average pixel value
+   */
+  public int getAvgPixelValue(int [][] pixels){
+    int totalValue = 0, numOfPixels = 0;
+    for (int row = 0; row < height; row ++){
+      for(int col = 0; col < width; col ++){
+        totalValue += pixels[row][col];
+        numOfPixels++;
+      }
+    }
+    return totalValue / numOfPixels;
   }
 
   /** Scale the image by a factor of 0.5 in each dimension

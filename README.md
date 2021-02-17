@@ -28,7 +28,11 @@ Before the Milestone is due, add answers to these questions:
 
 * Which 3 features did you implement? (It's OK to list more than 3.)
 
+        Darken, enhance and reduce contrast.
+
 * Which commit has the working Milestone code for grading?
+
+        "Three-Method Milestone"
 
 ## Final Project Status
 For each item below, append a 1-letter answer to whether it is done completely

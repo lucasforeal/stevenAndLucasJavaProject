@@ -40,7 +40,6 @@ public class ButtonPanel extends JPanel
       }
     });
 
-/*
     JButton darkenButton = new HoldableButton("Darken");
     add(darkenButton);
     darkenButton.addActionListener(new ActionListener() {
@@ -52,7 +51,6 @@ public class ButtonPanel extends JPanel
         gui.redisplayImage(false);
       }
     });
-*/
 
 /*
     JButton negativeButton = new JButton("Negative");
@@ -68,7 +66,6 @@ public class ButtonPanel extends JPanel
     });
 */
 
-/*
     JButton reduceContrastButton = new HoldableButton("- Contrast");
     add(reduceContrastButton);
     reduceContrastButton.addActionListener(new ActionListener() {
@@ -80,9 +77,7 @@ public class ButtonPanel extends JPanel
         gui.redisplayImage(false);
       }
     });
-*/
 
-/*
     JButton enhanceContrastButton = new HoldableButton("+ Contrast");
     add(enhanceContrastButton);
     enhanceContrastButton.addActionListener(new ActionListener() {
@@ -94,7 +89,6 @@ public class ButtonPanel extends JPanel
         gui.redisplayImage(false);
       }
     });
-*/
 
 /*
     JButton flipHButton = new JButton("FlipH");
