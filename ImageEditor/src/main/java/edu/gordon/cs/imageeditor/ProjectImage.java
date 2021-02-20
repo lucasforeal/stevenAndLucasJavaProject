@@ -143,10 +143,7 @@ public class ProjectImage
   public void lighten() {
     for (int row = 0; row < height; row ++) {
       for (int col = 0; col < width; col ++) {
-        pixels[row][col] += LIGHTEN_DARKEN_AMOUNT;
-        if (pixels[row][col] > MAX_BRIGHTNESS) {
-          pixels[row][col] = MAX_BRIGHTNESS;
-        }
+        pixels[row][col] = keepBelowMaxBrightness(pixels[row][col] + LIGHTEN_DARKEN_AMOUNT);
       }
     }
   }
@@ -155,14 +152,18 @@ public class ProjectImage
   public void darken(){
     for (int row = 0; row < height; row ++){
       for(int col = 0; col < width; col ++){
-        pixels[row][col] -= LIGHTEN_DARKEN_AMOUNT;
-        if (pixels[row][col] < MIN_BRIGHTNESS) {
-          pixels[row][col] = MIN_BRIGHTNESS;
-        }
+        pixels[row][col] = keepAboveMinBrightness(pixels[row][col] - LIGHTEN_DARKEN_AMOUNT);
       }
-    }     
-  }
+    }
+  }     
 
+  public void negative(){
+    for (int row = 0; row < height; row ++){
+      for(int col = 0; col < width; col ++){
+        pixels[row][col] = MAX_BRIGHTNESS - pixels[row][col];
+      }
+    }
+  }
   /** With the average pixel value as reference, it takes all pixels in the array,
    *  and makes all values closer to the average (if they are not average values yet).
    */
@@ -171,15 +172,9 @@ public class ProjectImage
     for (int row = 0; row < height; row ++){
       for(int col = 0; col < width; col ++){
         if (pixels[row][col] < avgPixelValue){
-          pixels[row][col]++;
-          if (pixels[row][col] > MAX_BRIGHTNESS){
-            pixels[row][col] = MAX_BRIGHTNESS;
-          }
+          pixels[row][col] = keepBelowMaxBrightness(pixels[row][col] + 1);
         }else if (pixels[row][col] > avgPixelValue){
-          pixels[row][col]--;
-          if (pixels[row][col] < MIN_BRIGHTNESS){
-            pixels[row][col] = MIN_BRIGHTNESS;
-          }
+          pixels[row][col] = keepAboveMinBrightness(pixels[row][col] - 1);
         }
       }
     }
@@ -192,18 +187,34 @@ public class ProjectImage
     for (int row = 0; row < height; row ++){
       for(int col = 0; col < width; col ++){
         if (pixels[row][col] < avgPixelValue){
-          pixels[row][col]--;
-          if (pixels[row][col] < MIN_BRIGHTNESS){
-            pixels[row][col] = MIN_BRIGHTNESS;
-          }
+          pixels[row][col] = keepAboveMinBrightness(pixels[row][col] - 1);
         }else if (pixels[row][col] > avgPixelValue){
-          pixels[row][col]++;
-          if (pixels[row][col] > MAX_BRIGHTNESS){
-            pixels[row][col] = MAX_BRIGHTNESS;
-          }
+          pixels[row][col] = keepBelowMaxBrightness(pixels[row][col] + 1);
         }
       }
     }
+  }
+  /** Keeps the pixel value below the MAX_BRIGHTNESS limit
+   * 
+   *  @param the pixel to be changed/kept
+   *  @return the value of the pixel
+   */
+  public int keepBelowMaxBrightness(int pixel){
+    if (pixel > MAX_BRIGHTNESS){
+      pixel = MAX_BRIGHTNESS;
+    }
+    return pixel;
+  }
+  /** Keeps the pixel value above the MIN_BRIGHTNESS limit
+   * 
+   *  @param the pixel to be changed/kept
+   *  @return the value of the pixel
+   */
+  public int keepAboveMinBrightness(int pixel){
+    if (pixel < MIN_BRIGHTNESS){
+      pixel = MIN_BRIGHTNESS;
+    }
+    return pixel;
   }
   /** Takes all the pixels in a picture and calculates the average pixel value
    * 
@@ -212,14 +223,15 @@ public class ProjectImage
    */
   public int getAvgPixelValue(int [][] pixels){
     int totalValue = 0, numOfPixels = 0;
-    for (int row = 0; row < height; row ++){
-      for(int col = 0; col < width; col ++){
-        totalValue += pixels[row][col];
+    for (int [] row: pixels){
+      for (int pixel: row){
+        totalValue += pixel;
         numOfPixels++;
       }
     }
     return totalValue / numOfPixels;
   }
+//L SH Work on line 171, methods above. check negative and encrypt/decrypt
 
   /** Scale the image by a factor of 0.5 in each dimension
    */
