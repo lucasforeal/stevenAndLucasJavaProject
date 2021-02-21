@@ -90,7 +90,6 @@ public class ButtonPanel extends JPanel
       }
     });
 
-/*
     JButton flipHButton = new JButton("FlipH");
     add(flipHButton);
     flipHButton.addActionListener(new ActionListener() {
@@ -102,9 +101,7 @@ public class ButtonPanel extends JPanel
         gui.redisplayImage(false);
       }
     });
-*/
 
-/*
     JButton flipVButton = new JButton("FlipV");
     add(flipVButton);
     flipVButton.addActionListener(new ActionListener() {
@@ -116,7 +113,6 @@ public class ButtonPanel extends JPanel
         gui.redisplayImage(false);
       }
     });
-*/
 
 /*
     JButton encryptDecryptButton = new JButton("En/Decrypt");

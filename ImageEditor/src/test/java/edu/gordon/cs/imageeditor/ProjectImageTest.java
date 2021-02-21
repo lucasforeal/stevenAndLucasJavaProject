@@ -87,7 +87,6 @@ public class ProjectImageTest {
   /**
    * Test of darken method.  Check for underflow.
    */
-/*
   @Test
   public void testDarken() {
     // Assume LIGHTEN_DARKEN_AMOUNT = 3
@@ -106,12 +105,10 @@ public class ProjectImageTest {
     pixelsToGray(result3x3);
     assertArrayEquals(after3x3, result3x3);
   }
-*/
 
   /**
    * Test of negative method.  Gray only.
    */
-/*
   @Test
   public void testNegative() {
     int[][] before3x3 = { { 0, 1, 2 },
@@ -129,13 +126,11 @@ public class ProjectImageTest {
     pixelsToGray(result3x3);
     assertArrayEquals(after3x3, result3x3);
   }
-*/
 
   /**
    * Test of enhanceContrast method.  Check near max, min, and average.
    * Gray only.
    */
-/*
   public void testEnhanceContrast() {
     int[][] before3x3 = { { 0, 1, 2 },
                           { 94, 95, 96 },
@@ -152,13 +147,11 @@ public class ProjectImageTest {
     pixelsToGray(result3x3);
     assertArrayEquals(after3x3, result3x3);
   }
-*/
 
   /**
    * Test of reduceContrast method.  Check near max, min, and average.
    * Gray only.
    */
-/*
   public void testReduceContrast() {
     int[][] before3x3 = { { 0, 1, 2 },
                           { 94, 95, 96 },
@@ -175,7 +168,6 @@ public class ProjectImageTest {
     pixelsToGray(result3x3);
     assertArrayEquals(after3x3, result3x3);
   }
-*/
 
   /**
    * Test of calculateHistogram method.
@@ -212,7 +204,6 @@ public class ProjectImageTest {
   /**
    * Test of flipHorizontally method. Gray only.
    */
-/*
   @Test
   public void testFlipHorizontally() {
     int[][] before3x3 = { { 0, 50, 100 },
@@ -230,12 +221,10 @@ public class ProjectImageTest {
     pixelsToGray(result3x3);
     assertArrayEquals(after3x3, result3x3);
   }
-*/
 
   /**
    * Test of flipVertically method. Gray only.
    */
-/*
   @Test
   public void testFlipVertically() {
     int[][] before3x3 = { { 0, 50, 100 },
@@ -253,7 +242,6 @@ public class ProjectImageTest {
     pixelsToGray(result3x3);
     assertArrayEquals(after3x3, result3x3);
   }
-*/
 
   /**
    * Test of encryptDecrypt method. Gray only.

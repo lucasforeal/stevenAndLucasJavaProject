@@ -149,17 +149,19 @@ public class ProjectImage
   }
   /** Darken the image by the same fixed amount as lighten()
    */
-  public void darken(){
-    for (int row = 0; row < height; row ++){
-      for(int col = 0; col < width; col ++){
+  public void darken() {
+    for (int row = 0; row < height; row ++) {
+      for (int col = 0; col < width; col ++) {
         pixels[row][col] = keepAboveMinBrightness(pixels[row][col] - LIGHTEN_DARKEN_AMOUNT);
       }
     }
   }     
 
-  public void negative(){
-    for (int row = 0; row < height; row ++){
-      for(int col = 0; col < width; col ++){
+  /** Reverses the value of pixels
+   */
+  public void negative() {
+    for (int row = 0; row < height; row ++) {
+      for (int col = 0; col < width; col ++) {
         pixels[row][col] = MAX_BRIGHTNESS - pixels[row][col];
       }
     }
@@ -167,14 +169,14 @@ public class ProjectImage
   /** With the average pixel value as reference, it takes all pixels in the array,
    *  and makes all values closer to the average (if they are not average values yet).
    */
-  public void reduceContrast(){
+  public void reduceContrast() {
     int avgPixelValue = getAvgPixelValue(pixels);
-    for (int row = 0; row < height; row ++){
-      for(int col = 0; col < width; col ++){
-        if (pixels[row][col] < avgPixelValue){
-          pixels[row][col] = keepBelowMaxBrightness(pixels[row][col] + 1);
-        }else if (pixels[row][col] > avgPixelValue){
-          pixels[row][col] = keepAboveMinBrightness(pixels[row][col] - 1);
+    for (int row = 0; row < height; row ++) {
+      for (int col = 0; col < width; col ++) {
+        if (pixels[row][col] < avgPixelValue) {
+          pixels[row][col]++;
+        } else if (pixels[row][col] > avgPixelValue) {
+          pixels[row][col]--;
         }
       }
     }
@@ -182,13 +184,13 @@ public class ProjectImage
   /** With the average pixel value as reference, it takes all pixels in the array,
    *  and makes all values further from the average (if they are not average values yet).
    */
-  public void enhanceContrast(){
+  public void enhanceContrast() {
     int avgPixelValue = getAvgPixelValue(pixels);
-    for (int row = 0; row < height; row ++){
-      for(int col = 0; col < width; col ++){
-        if (pixels[row][col] < avgPixelValue){
+    for (int row = 0; row < height; row ++) {
+      for (int col = 0; col < width; col ++) {
+        if (pixels[row][col] < avgPixelValue) {
           pixels[row][col] = keepAboveMinBrightness(pixels[row][col] - 1);
-        }else if (pixels[row][col] > avgPixelValue){
+        } else if (pixels[row][col] > avgPixelValue) {
           pixels[row][col] = keepBelowMaxBrightness(pixels[row][col] + 1);
         }
       }
@@ -199,8 +201,8 @@ public class ProjectImage
    *  @param the pixel to be changed/kept
    *  @return the value of the pixel
    */
-  public int keepBelowMaxBrightness(int pixel){
-    if (pixel > MAX_BRIGHTNESS){
+  private int keepBelowMaxBrightness(int pixel) {
+    if (pixel > MAX_BRIGHTNESS) {
       pixel = MAX_BRIGHTNESS;
     }
     return pixel;
@@ -210,8 +212,8 @@ public class ProjectImage
    *  @param the pixel to be changed/kept
    *  @return the value of the pixel
    */
-  public int keepAboveMinBrightness(int pixel){
-    if (pixel < MIN_BRIGHTNESS){
+  private  int keepAboveMinBrightness(int pixel) {
+    if (pixel < MIN_BRIGHTNESS) {
       pixel = MIN_BRIGHTNESS;
     }
     return pixel;
@@ -221,18 +223,56 @@ public class ProjectImage
    *  @param pixels the 2D array of pixels; the picture
    *  @return the integer average pixel value
    */
-  public int getAvgPixelValue(int [][] pixels){
+  private int getAvgPixelValue(int [][] pixels) {
     int totalValue = 0, numOfPixels = 0;
-    for (int [] row: pixels){
-      for (int pixel: row){
+    for (int [] row: pixels) {
+      for (int pixel: row) {
         totalValue += pixel;
         numOfPixels++;
       }
     }
     return totalValue / numOfPixels;
   }
-//L SH Work on line 171, methods above. check negative and encrypt/decrypt
+//L SH Work on line 171, methods above. check negative button and encrypt/decrypt
+public void encryptDecrypt() {
+  int randomValue = (int) (Math.random() * MAX_BRIGHTNESS);
+  // Something about nextInt(MAX_BRIGHTNESS+1)
+  for (int row = 0; row < height; row++) {
+    for (int col = 0; col < width; col++) {
+      pixels[row][col] += randomValue;
+    }
+  }
+}
 
+public void flipHorizontally() {
+  int [][] newPixels = new int [height][width];
+  for (int row = 0; row < height; row++) {
+    for (int col = 0; col < width; col++) {
+      newPixels[row][col] = pixels[row][width - col - 1];
+    }
+  }
+  pixels = newPixels;
+}
+public void flipVertically() {
+  int [][] newPixels = new int [height][width];
+  for (int row = 0; row < height; row++) {
+    for (int col = 0; col < width; col++) {
+      newPixels[row][col] = pixels[height - row - 1][col];
+    }
+  }
+  pixels = newPixels;
+
+}
+public void rotate() {
+  int [][] newPixels = new int [width][height];
+  for (int row = 0; row < height; row++) {
+    for (int col = 0; col < width; col++) {
+      newPixels[row][col] = pixels[col][row];// Check syntax
+      // Regarding the [y][x] (?) format, which one is the height,
+      // and which one is the width?
+    }
+  }
+}
   /** Scale the image by a factor of 0.5 in each dimension
    */
   public void halve() {
