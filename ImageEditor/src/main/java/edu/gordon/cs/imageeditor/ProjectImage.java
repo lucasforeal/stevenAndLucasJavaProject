@@ -196,6 +196,31 @@ public class ProjectImage
       }
     }
   }
+  //Encrypts the image, meaning random random generates number
+  //Adding ^seed with randomInt en/decrypt method
+  public void encryptDecrypt (int seed) {
+      Random random = new Random(seed);
+      for (int row = 0; row < height; row ++)
+        for (int col = 0; col < width; col ++) {
+          int randomInt = random.nextInt(MAX_BRIGHTNESS + 1);
+          pixels[row][col] = pixels[row][col]^seed + randomInt;
+        }
+    }
+  //Rotates the image to the right 45 degrees
+  public void rotate()
+    {
+        int spinningHeight = width;
+        int spinningWidth = height;
+        int [] [] spinningPixels = new int [spinningHeight] [spinningWidth];
+        for (int row = 0; row < height; row ++)
+            for (int col = 0; col < width; col ++)
+            {
+                spinningPixels[col][row] = pixels[height - 1 - row][col];
+            }
+        width = spinningWidth;
+        height = spinningHeight;
+        pixels = spinningPixels;
+    }
   /** Keeps the pixel value below the MAX_BRIGHTNESS limit
    * 
    *  @param the pixel to be changed/kept
