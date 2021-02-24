@@ -114,7 +114,7 @@ public class ButtonPanel extends JPanel
       }
     });
 
-/*
+
     JButton encryptDecryptButton = new JButton("En/Decrypt");
     add(encryptDecryptButton);
     encryptDecryptButton.addActionListener(new ActionListener() {
@@ -141,7 +141,7 @@ public class ButtonPanel extends JPanel
         }
       }
     });
-*/
+
 
 /*
     JButton histogramButton = new JButton("Histogram");
@@ -224,7 +224,7 @@ public class ButtonPanel extends JPanel
     });
 */
 
-/*
+
     JButton rotateButton = new JButton("Rotate");
     add(rotateButton);
     rotateButton.addActionListener(new ActionListener() {
@@ -236,7 +236,7 @@ public class ButtonPanel extends JPanel
         gui.redisplayImage(true);
       }
     });
-*/
+
 
 /*
     JButton doubleButton = new JButton("Double");
