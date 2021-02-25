@@ -250,24 +250,99 @@ public class ProjectImageTest {
    */
 /*
   @Test
-  public void testEncryptDecrypt(537) {
-    int[][] before3x3 = { { 0, 50, 100 },
+  public void testEncryptDecrypt() {
+    int[][] start3x3 = { { 0, 50, 100 },
                           { 50, 95, 96 },
                           { 60, 254, 255 }
                         };
+                        
+    int[][] copy3x3 =  { { 0, 50, 100 },
+                         { 50, 95, 96 },
+                         { 60, 254, 255 }
+                       };
+                       
     ProjectImage image3x3 = new ProjectImage(ColorModel.getRGBdefault(),
-                                             before3x3);
+                                             start3x3);
     image3x3.encryptDecrypt(537);
     int[][] result3x3;
     result3x3 = image3x3.getPixels();
     for (int r=0; r < 3; r++) {
       for (int c=0; c < 3; c++) {
-        assertNotEquals(before3x3[r][c], result3x3[r][c]);
+        assertNotEquals(copy3x3[r][c], result3x3[r][c]);
       }
     }
 
-    image3x3.encryptDecrypt();
+    image3x3.encryptDecrypt(537);
     result3x3 = image3x3.getPixels();
+    pixelsToGray(result3x3);
+    assertArrayEquals(copy3x3, result3x3);
+  }
+*/
+
+  /**
+   * Test shiftHorizontally: right shift 1
+   */
+/*
+  @Test
+  public void testShiftHorizontally1() {
+    int[][] before3x3 = { { 0, 1, 2 },
+                          { 94, 95, 96 },
+                          { 60, 254, 255 }
+                        };
+    int[][] after3x3  = { { 2, 0, 1 },
+                          { 96, 94, 95 },
+                          { 255, 60, 254 }
+                        };
+    ProjectImage image3x3 = new ProjectImage(ColorModel.getRGBdefault(),
+                                             before3x3);
+    image3x3.shiftHorizontally(1);
+    int[][] result3x3 = image3x3.getPixels();
+    pixelsToGray(result3x3);
+    assertArrayEquals(after3x3, result3x3);
+  }
+*/
+
+  /**
+   * Test shiftHorizontally: no shift, 0
+   */
+/*
+  @Test
+  public void testShiftHorizontally0() {
+    int[][] before3x3 = { { 0, 1, 2 },
+                          { 94, 95, 96 },
+                          { 60, 254, 255 }
+                        };
+    int[][] after3x3  = { { 0, 1, 2 },
+                          { 94, 95, 96 },
+                          { 60, 254, 255 }
+                        };
+    ProjectImage image3x3 = new ProjectImage(ColorModel.getRGBdefault(),
+                                             before3x3);
+    image3x3.shiftHorizontally(0);
+    int[][] result3x3 = image3x3.getPixels();
+    pixelsToGray(result3x3);
+    assertArrayEquals(after3x3, result3x3);
+  }
+*/
+
+  /**
+   * Test shiftHorizontally: left shift 1
+   */
+/*
+  @Test
+  public void testShiftHorizontallyNeg1() {
+    int[][] before3x3 = { { 0, 1, 2 },
+                          { 94, 95, 96 },
+                          { 60, 254, 255 }
+                        };
+    int[][] after3x3  = { { 1, 2, 0 },
+                          { 95, 96, 94 },
+                          { 254, 255, 60 }
+                        };
+    ProjectImage image3x3 = new ProjectImage(ColorModel.getRGBdefault(),
+                                             before3x3);
+    image3x3.shiftHorizontally(-1);
+    int[][] result3x3 = image3x3.getPixels();
     pixelsToGray(result3x3);
     assertArrayEquals(after3x3, result3x3);
   }
