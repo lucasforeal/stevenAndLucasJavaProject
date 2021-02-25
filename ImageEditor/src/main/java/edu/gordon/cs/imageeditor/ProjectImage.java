@@ -258,6 +258,8 @@ public class ProjectImage
     }
     return totalValue / numOfPixels;
   }
+  
+/*  
 //L SH Work on line 171, methods above. check negative button and encrypt/decrypt
 public void encryptDecrypt() {
   int randomValue = (int) (Math.random() * MAX_BRIGHTNESS);
@@ -268,6 +270,7 @@ public void encryptDecrypt() {
     }
   }
 }
+*/
 
 public void flipHorizontally() {
   int [][] newPixels = new int [height][width];
